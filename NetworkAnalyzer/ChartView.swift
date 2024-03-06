@@ -26,7 +26,14 @@ struct SecondScreen: View{
     @State private var selectedXValue: String?
     @State private var selectedYValue: Int?
     @State private var isScanningState = false
-    @State private var isPopoverPresented = false
+    @State private var showSheet = false
+    
+    
+    var meanRSSI: Double {
+        let rssiValues = measuredValues.map { Double($0.rssi) }
+        return rssiValues.reduce(0, +) / Double(rssiValues.count)
+    }
+    
     
     var correspondingYValue: Int? {
         guard let selectedXValue = selectedXValue else { return nil }
@@ -53,15 +60,15 @@ struct SecondScreen: View{
                 Button(action: {
                     ble.stopScan()
                     isScanningState = false
-                    print(ble.isScanning)
+                    //Show Sheet when button is pressed
+                    showSheet = true
                 }){
-                   Text("Stop Scan")
+                    Text(ble.isScanning ? "Stop Scan": "Details")
                 }
                 .padding()
                 .background(ble.isScanning ? Color.red : Color.gray)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
-                .disabled(!isScanningState)
                 .bold()
                 
                 // Display selected time
@@ -95,7 +102,7 @@ struct SecondScreen: View{
                 }
                 .symbol(by: .value("", "RSSI"))
                 
-            // Rulemark to highlight selected timestamp
+                // Rulemark to highlight selected timestamp
                 if let selectedValue = selectedXValue {
                     RuleMark(x: .value("selected", selectedValue))
                     
@@ -103,11 +110,11 @@ struct SecondScreen: View{
                         .foregroundStyle(Color.gray.opacity(0.3))
                         .offset(yStart: -10)
                         .zIndex(-1)
-                    }
                 }
+            }
             
             
-        //List with all measured values and corresponding timestamp
+            //List with all measured values and corresponding timestamp
             List(measuredValues.reversed(), id: \.id){ measuredValue in
                 VStack(alignment: .leading) {
                     Text("RSSI: \(measuredValue.rssi)")
@@ -117,7 +124,12 @@ struct SecondScreen: View{
                     
                 }
             }
+            .sheet(isPresented: $showSheet){
+                DataSum(measuredValues: measuredValues)
+                    .presentationDetents([.fraction(0.1), .medium])
+            }
         }
+        
         
         .navigationBarTitle("Measured Values")
         

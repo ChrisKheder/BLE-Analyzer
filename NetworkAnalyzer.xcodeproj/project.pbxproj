@@ -10,6 +10,7 @@
 		F492C2702B90B4CE000BDCD5 /* BLEScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */; };
 		F492C2722B91D071000BDCD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C2712B91D071000BDCD5 /* ContentView.swift */; };
 		F492C2752B91D840000BDCD5 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C2742B91D840000BDCD5 /* ChartView.swift */; };
+		F4CD8EF02B98B620009032FF /* DataSumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CD8EEF2B98B620009032FF /* DataSumView.swift */; };
 		F4E31A9C2B90777A00558955 /* NetworkAnalyzerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */; };
 		F4E31AA02B90777D00558955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E31A9F2B90777D00558955 /* Assets.xcassets */; };
 		F4E31AA32B90777D00558955 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E31AA22B90777D00558955 /* Preview Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScanner.swift; sourceTree = "<group>"; };
 		F492C2712B91D071000BDCD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F492C2742B91D840000BDCD5 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		F4CD8EEF2B98B620009032FF /* DataSumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSumView.swift; sourceTree = "<group>"; };
 		F4E31A982B90777A00558955 /* BLE Analyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE Analyzer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzerApp.swift; sourceTree = "<group>"; };
 		F4E31A9F2B90777D00558955 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */,
 				F492C2712B91D071000BDCD5 /* ContentView.swift */,
 				F492C2742B91D840000BDCD5 /* ChartView.swift */,
+				F4CD8EEF2B98B620009032FF /* DataSumView.swift */,
 				F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */,
 				F4E31A9F2B90777D00558955 /* Assets.xcassets */,
 				F4E31AA12B90777D00558955 /* Preview Content */,
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CD8EF02B98B620009032FF /* DataSumView.swift in Sources */,
 				F492C2722B91D071000BDCD5 /* ContentView.swift in Sources */,
 				F492C2702B90B4CE000BDCD5 /* BLEScanner.swift in Sources */,
 				F492C2752B91D840000BDCD5 /* ChartView.swift in Sources */,

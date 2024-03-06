@@ -14,12 +14,18 @@ struct DiscoveredPeripheral {
     // Struct to represent a discovered peripheral
     var peripheral: CBPeripheral
     var advertisedData: String
+    var rssi: Int
+    var timestamp: String
+    
+    var measuredValues: [MeasuredValue]
 }
 
 class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
     @Published var discoveredPeripherals = [DiscoveredPeripheral]()
     @Published var isScanning = false
     var centralManager: CBCentralManager!
+    
+    
     // Set to store unique peripherals that have been discovered
     var discoveredPeripheralSet = Set<CBPeripheral>()
     var timer: Timer?
@@ -42,7 +48,7 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
 
             // Start a timer to stop and restart the scan every 2 seconds
             timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
                 self?.centralManager.stopScan()
                 self?.centralManager.scanForPeripherals(withServices: nil)
             }
@@ -54,6 +60,7 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
         isScanning = false
         timer?.invalidate()
         centralManager.stopScan()
+        
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -75,7 +82,7 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
             stopScan()
         case .poweredOn:
             //print("central.state is .poweredOn")
-            startScan()
+            break
         @unknown default:
             print("central.state is unknown")
         }
@@ -85,6 +92,7 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // Build a string representation of the advertised data and sort it by names
         var advertisedData = advertisementData.map { "\($0): \($1)" }.sorted(by: { $0 < $1 }).joined(separator: "\n")
+        
 
         // Convert the timestamp into human readable format and insert it to the advertisedData String
         let timestampValue = advertisementData["kCBAdvDataTimestamp"] as! Double
@@ -93,18 +101,31 @@ class BluetoothScanner: NSObject, CBCentralManagerDelegate, ObservableObject {
         dateFormatter.dateFormat = "HH:mm:ss"
         let dateString = dateFormatter.string(from: Date(timeIntervalSince1970: timestampValue))
 
-        advertisedData = "actual rssi: \(RSSI) dB\n" + "Timestamp: \(dateString)\n" + advertisedData
-
+        advertisedData = "RSSI: \(RSSI) dB\n" + "Timestamp: \(dateString)\n"
+        
+        //Create measured value object
+        let measuredValue = MeasuredValue(rssi: RSSI.intValue, timestamp: dateString)
+        
+        
         // If the peripheral is not already in the list
-        if !discoveredPeripheralSet.contains(peripheral) {
+        if !discoveredPeripheralSet.contains(peripheral) && peripheral.name != nil  {
             // Add it to the list and the set
-            discoveredPeripherals.append(DiscoveredPeripheral(peripheral: peripheral, advertisedData: advertisedData))
+            discoveredPeripherals.append(DiscoveredPeripheral(peripheral: peripheral, advertisedData: advertisedData, rssi: RSSI.intValue, timestamp: dateString, measuredValues: [measuredValue]))
             discoveredPeripheralSet.insert(peripheral)
             objectWillChange.send()
         } else {
             // If the peripheral is already in the list, update its advertised data
-            if let index = discoveredPeripherals.firstIndex(where: { $0.peripheral == peripheral }) {
+            if let index = discoveredPeripherals.firstIndex(where: { $0.peripheral == peripheral}) {
+                //Update the advertised data
                 discoveredPeripherals[index].advertisedData = advertisedData
+                discoveredPeripherals[index].rssi = RSSI.intValue
+                
+                //Check if timestamp already exist and update if not
+                if !discoveredPeripherals[index].measuredValues.contains(where: {$0.timestamp == dateString}){
+                    discoveredPeripherals[index].timestamp = dateString
+                    discoveredPeripherals[index].measuredValues.append(measuredValue)
+                }
+                
                 objectWillChange.send()
             }
         }

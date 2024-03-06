@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F492C2702B90B4CE000BDCD5 /* BLEScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */; };
+		F492C2722B91D071000BDCD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C2712B91D071000BDCD5 /* ContentView.swift */; };
+		F492C2752B91D840000BDCD5 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492C2742B91D840000BDCD5 /* ChartView.swift */; };
 		F4E31A9C2B90777A00558955 /* NetworkAnalyzerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */; };
-		F4E31A9E2B90777A00558955 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E31A9D2B90777A00558955 /* ContentView.swift */; };
 		F4E31AA02B90777D00558955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E31A9F2B90777D00558955 /* Assets.xcassets */; };
 		F4E31AA32B90777D00558955 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E31AA22B90777D00558955 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F4E31A982B90777A00558955 /* NetworkAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEScanner.swift; sourceTree = "<group>"; };
+		F492C2712B91D071000BDCD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F492C2742B91D840000BDCD5 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		F4E31A982B90777A00558955 /* BLE Analyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BLE Analyzer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAnalyzerApp.swift; sourceTree = "<group>"; };
-		F4E31A9D2B90777A00558955 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F4E31A9F2B90777D00558955 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4E31AA22B90777D00558955 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,7 +47,7 @@
 		F4E31A992B90777A00558955 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4E31A982B90777A00558955 /* NetworkAnalyzer.app */,
+				F4E31A982B90777A00558955 /* BLE Analyzer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,7 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				F4E31A9B2B90777A00558955 /* NetworkAnalyzerApp.swift */,
-				F4E31A9D2B90777A00558955 /* ContentView.swift */,
+				F492C2712B91D071000BDCD5 /* ContentView.swift */,
+				F492C2742B91D840000BDCD5 /* ChartView.swift */,
+				F492C26F2B90B4CE000BDCD5 /* BLEScanner.swift */,
 				F4E31A9F2B90777D00558955 /* Assets.xcassets */,
 				F4E31AA12B90777D00558955 /* Preview Content */,
 			);
@@ -70,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F4E31A972B90777A00558955 /* NetworkAnalyzer */ = {
+		F4E31A972B90777A00558955 /* BLE Analyzer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4E31AA62B90777D00558955 /* Build configuration list for PBXNativeTarget "NetworkAnalyzer" */;
+			buildConfigurationList = F4E31AA62B90777D00558955 /* Build configuration list for PBXNativeTarget "BLE Analyzer" */;
 			buildPhases = (
 				F4E31A942B90777A00558955 /* Sources */,
 				F4E31A952B90777A00558955 /* Frameworks */,
@@ -82,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = NetworkAnalyzer;
+			name = "BLE Analyzer";
 			productName = NetworkAnalyzer;
-			productReference = F4E31A982B90777A00558955 /* NetworkAnalyzer.app */;
+			productReference = F4E31A982B90777A00558955 /* BLE Analyzer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -95,7 +101,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F4E31A972B90777A00558955 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -115,7 +121,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4E31A972B90777A00558955 /* NetworkAnalyzer */,
+				F4E31A972B90777A00558955 /* BLE Analyzer */,
 			);
 		};
 /* End PBXProject section */
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4E31A9E2B90777A00558955 /* ContentView.swift in Sources */,
+				F492C2722B91D071000BDCD5 /* ContentView.swift in Sources */,
+				F492C2702B90B4CE000BDCD5 /* BLEScanner.swift in Sources */,
+				F492C2752B91D840000BDCD5 /* ChartView.swift in Sources */,
 				F4E31A9C2B90777A00558955 /* NetworkAnalyzerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +189,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -195,7 +204,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -241,6 +250,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -249,7 +259,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -270,6 +280,8 @@
 				DEVELOPMENT_TEAM = AN8Q24H8Q5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Allow this app to search for nearby BLE APs";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Allow this app to use BLE functionalities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +311,8 @@
 				DEVELOPMENT_TEAM = AN8Q24H8Q5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Allow this app to search for nearby BLE APs";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Allow this app to use BLE functionalities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -329,7 +343,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4E31AA62B90777D00558955 /* Build configuration list for PBXNativeTarget "NetworkAnalyzer" */ = {
+		F4E31AA62B90777D00558955 /* Build configuration list for PBXNativeTarget "BLE Analyzer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4E31AA72B90777D00558955 /* Debug */,

@@ -9,7 +9,7 @@ import SwiftUI
 import CoreBluetooth
 import Charts
 
-struct ContentView2: View {
+struct ContentView: View {
     @ObservedObject private var ble = BluetoothScanner()
     @State private var searchText = ""
     @State var graphView: Bool = false
@@ -36,7 +36,7 @@ struct ContentView2: View {
                 List(ble.discoveredPeripherals.filter{
                     self.searchText.isEmpty ? true : $0.peripheral.name?.lowercased().contains(self.searchText.lowercased()) == true
                 }, id: \.peripheral.identifier) { DiscoveredPeripheral in
-                    NavigationLink(destination: SecondScreen2(ble: ble, advertisedData: DiscoveredPeripheral.advertisedData, rssi: DiscoveredPeripheral.rssi, timestamp: DiscoveredPeripheral.timestamp, measuredValues: DiscoveredPeripheral.measuredValues)){
+                    NavigationLink(destination: SecondScreen(ble: ble, advertisedData: DiscoveredPeripheral.advertisedData, rssi: DiscoveredPeripheral.rssi, timestamp: DiscoveredPeripheral.timestamp, measuredValues: DiscoveredPeripheral.measuredValues)){
                         VStack(alignment: .leading) {
                             Text(DiscoveredPeripheral.peripheral.name ?? "Unknown Name")
                                 .foregroundColor(Color("TextColor"))

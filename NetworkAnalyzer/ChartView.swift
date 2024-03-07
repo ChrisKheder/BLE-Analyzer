@@ -12,6 +12,7 @@ import Combine
 
 struct SecondScreen: View{
     
+    
     let ble: BluetoothScanner
    
     // Data from the chosen peripheral.
@@ -53,66 +54,66 @@ struct SecondScreen: View{
     
     var body: some View {
         
-        VStack{
-            HStack{
-                
-                //Disconnect button
-                Button(action: {
-                    ble.stopScan()
-                    isScanningState = false
-                    //Show Sheet when button is pressed
-                    showSheet = true
-                }){
-                    Text(ble.isScanning ? "Stop Scan": "Details")
-                }
-                .padding()
-                .background(ble.isScanning ? Color.red : Color.gray)
-                .foregroundColor(Color.white)
-                .cornerRadius(5)
-                .bold()
-                
-                // Display selected time
-                if let selectedXValue = selectedXValue{
-                    Text("Selected time: \(selectedXValue)")
-                        .foregroundColor(Color("TextColor"))
-                } else {
-                    Text("Selected time: -")
-                        .foregroundColor(Color("TextColor"))
-                }
-                
-                //Display selected signal strength
-                if let selectedYValue = correspondingYValue{
-                    Text("RSSI: \(selectedYValue) dBm")
-                        .foregroundColor(Color("TextColor"))
-                } else {
-                    Text("RSSI: - dBm")
-                        .foregroundColor(Color("TextColor"))
-                }
-            }
             
-            .onReceive(ble.objectWillChange) { _ in
-                isScanningState = ble.isScanning
-                
-            }
-            
-            // Displaying measured values in a graph.
-            Chart{
-                ForEach(measuredValues){ points in
-                    LineMark(x: .value("timestamp", points.timestamp), y: .value("rssi", points.rssi))
-                }
-                .symbol(by: .value("", "RSSI"))
-                
-                // Rulemark to highlight selected timestamp
-                if let selectedValue = selectedXValue {
-                    RuleMark(x: .value("selected", selectedValue))
+            VStack{
+                HStack{
                     
-                    //Customizing the Rulemark
-                        .foregroundStyle(Color.gray.opacity(0.3))
-                        .offset(yStart: -10)
-                        .zIndex(-1)
+                    //Disconnect button
+                    Button(action: {
+                        ble.stopScan()
+                        isScanningState = false
+                        //Show Sheet when button is pressed
+                        showSheet = true
+                    }){
+                        Text(ble.isScanning ? "Stop Scan": "Details")
+                    }
+                    .padding()
+                    .background(ble.isScanning ? Color.red : Color.gray)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(5)
+                    .bold()
+                    
+                    // Display selected time
+                    if let selectedXValue = selectedXValue{
+                        Text("Selected time: \(selectedXValue)")
+                            .foregroundColor(Color("TextColor"))
+                    } else {
+                        Text("Selected time: -")
+                            .foregroundColor(Color("TextColor"))
+                    }
+                    
+                    //Display selected signal strength
+                    if let selectedYValue = correspondingYValue{
+                        Text("RSSI: \(selectedYValue) dBm")
+                            .foregroundColor(Color("TextColor"))
+                    } else {
+                        Text("RSSI: - dBm")
+                            .foregroundColor(Color("TextColor"))
+                    }
                 }
-            }
-            
+                
+                .onReceive(ble.objectWillChange) { _ in
+                    isScanningState = ble.isScanning
+                    
+                }
+                
+                // Displaying measured values in a graph.
+                Chart{
+                    ForEach(measuredValues){ points in
+                        LineMark(x: .value("timestamp", points.timestamp), y: .value("rssi", points.rssi))
+                    }
+                    .symbol(by: .value("", "RSSI"))
+                    
+                    // Rulemark to highlight selected timestamp
+                    if let selectedValue = selectedXValue {
+                        RuleMark(x: .value("selected", selectedValue))
+                        
+                        //Customizing the Rulemark
+                            .foregroundStyle(Color.gray.opacity(0.3))
+                            .offset(yStart: -10)
+                            .zIndex(-1)
+                    }
+                }
             
             //List with all measured values and corresponding timestamp
             List(measuredValues.reversed(), id: \.id){ measuredValue in
@@ -124,14 +125,15 @@ struct SecondScreen: View{
                     
                 }
             }
-            .sheet(isPresented: $showSheet){
-                DataSum(measuredValues: measuredValues)
-                    .presentationDetents([.fraction(0.1), .medium])
-            }
         }
         
         
         .navigationBarTitle("Measured Values")
+        .sheet(isPresented: $showSheet){
+            DataSum(measuredValues: measuredValues)
+                .presentationDetents([.fraction(0.1), .medium])
+                
+        }
         
         //Chart axis configurations
         .chartXAxis(.hidden)

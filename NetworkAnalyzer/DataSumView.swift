@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DataSum: View {
+    @Environment(\.dismiss) var dismiss
     let measuredValues : [MeasuredValue]
     
     
@@ -73,27 +74,41 @@ struct DataSum: View {
     
     
     var body: some View {
-        VStack(spacing:10) {
-            Text("Data Summary")
-                .padding(.bottom)
-                .foregroundColor(Color("TextColor"))
-                .font(.largeTitle)
-            
-            Text("Mean: \(meanRSSI)")
-            Text("Total Points Measured: \(totalPointsMeasured)")
-            Text("Largest Value: \(largestValue ?? 0)") // Use 0 as default value if largestValue is nil
-            Text("Smallest Value: \(smallestValue ?? 0)") // Use 0 as default value if smallestValue is nil
-            Text("Median RSSI: \(medianRSSI ?? 0)") // Use 0 as default value if medianRSSI is nil
-            Text("Range of RSSI: \(rangeOfRSSI ?? 0)") // Use 0 as default value if rangeOfRSSI is nil
-            if let timeRange = timeRange {
-                Text("Time Range: \(timeRange.start) - \(timeRange.end)")
-            } else {
-                Text("Time Range: -")
-            }
-            Text("Standard Deviation: \(standardDeviation ?? 0)") // Use 0 as default value if standardDeviation is nil
+        
+        ZStack{
+            Color.clear
+                .overlay(alignment: .topTrailing){
+                    Button{
+                        dismiss()
+                    }label: {
+                        Image(systemName: "x.circle.fill")
+                            .imageScale(.large)
+                            .padding()
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .overlay(alignment: .top){
+                    Text("Data Summary")
+                        .foregroundColor(Color("TextColor"))
+                        .font(.largeTitle)
+                        .padding()
+                }
         }
-        .padding()
-        .cornerRadius(10)
-        .shadow(radius: 5)
+//        VStack(spacing:10) {
+//                        Text("Mean: \(meanRSSI)")
+//                        Text("Total Points Measured: \(totalPointsMeasured)")
+//                        Text("Largest Value: \(largestValue ?? 0)") // Use 0 as default value if largestValue is nil
+//                        Text("Smallest Value: \(smallestValue ?? 0)") // Use 0 as default value if smallestValue is nil
+//                        Text("Median RSSI: \(medianRSSI ?? 0)") // Use 0 as default value if medianRSSI is nil
+//                        Text("Range of RSSI: \(rangeOfRSSI ?? 0)") // Use 0 as default value if rangeOfRSSI is nil
+//                        if let timeRange = timeRange {
+//                            Text("Time Range: \(timeRange.start) - \(timeRange.end)")
+//                        } else {
+//                            Text("Time Range: -")
+//                        }
+//                        Text("Standard Deviation: \(standardDeviation ?? 0)") // Use 0 as default value if standardDeviation is nil
+//                        Spacer()
+//                    }
+//                    .padding()
     }
 }

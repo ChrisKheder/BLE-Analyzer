@@ -127,12 +127,15 @@ struct SecondScreen: View{
             }
         }
         
-        //Bottom Sheet that displays Data Summary
+        
         .navigationBarTitle("Measured Values")
+        .font(.headline)
+        
+        //Bottom Sheet that displays Data Summary
         .sheet(isPresented: $showSheet){
             DataSum(measuredValues: measuredValues)
-                .presentationDetents([.fraction(0.1), .medium])
-                
+                .presentationDetents([.fraction(0.1), .fraction(0.5)])
+                .presentationBackgroundInteraction(.enabled(upThrough: .fraction(0.5)))
         }
         
         //Chart axis configurations

@@ -98,7 +98,7 @@ struct DataSum: View {
             
             // Main body of view
             GeometryReader {geometry in
-                VStack(spacing:10) {
+                VStack() {
                     Text("Data Summary")
                         .font(.largeTitle)
                     Spacer()

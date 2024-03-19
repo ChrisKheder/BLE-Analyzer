@@ -127,7 +127,7 @@ struct SecondScreen: View{
             }
         }
         
-        
+        //Bottom Sheet that displays Data Summary
         .navigationBarTitle("Measured Values")
         .sheet(isPresented: $showSheet){
             DataSum(measuredValues: measuredValues)
@@ -148,11 +148,9 @@ struct SecondScreen: View{
         .chartScrollTargetBehavior(
             .valueAligned(unit: 1))
         
-        //Selection
+        //Selection of value on graph
         .chartXSelection(value: $selectedXValue)
         .chartYSelection(value: $selectedYValue)
-        
-        
         .onChange(of: selectedYValue){ oldValue, newValue in
             //print("\(newValue)")
         }

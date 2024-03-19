@@ -12,24 +12,28 @@ struct DataSum: View {
     @Environment(\.dismiss) var dismiss
     let measuredValues : [MeasuredValue]
     
-    
+    // Mean
     var meanRSSI: Double {
         let rssiValues = measuredValues.map { Double($0.rssi) }
         return rssiValues.reduce(0, +) / Double(rssiValues.count)
     }
     
+    // Total points
     var totalPointsMeasured: Int {
         return measuredValues.count
     }
     
+    // Largest value
     var largestValue: Int? {
         return measuredValues.max(by: {$0.rssi < $1.rssi})?.rssi
     }
     
+    // Smallest value
     var smallestValue: Int? {
         return measuredValues.min(by:{$0.rssi < $1.rssi})?.rssi
     }
     
+    // Time range
     var timeRange: (start: String, end: String)? {
         guard let startTime = measuredValues.first?.timestamp,
               let endTime = measuredValues.last?.timestamp else {
@@ -38,7 +42,7 @@ struct DataSum: View {
         return (start: startTime, end: endTime)
     }
     
-    
+    // RSSI range
     var rangeOfRSSI: Int? {
         guard let smallestValue = measuredValues.min(by: { $0.rssi < $1.rssi })?.rssi,
               let largestValue = measuredValues.max(by: { $0.rssi < $1.rssi })?.rssi else {
@@ -47,6 +51,7 @@ struct DataSum: View {
         return largestValue - smallestValue
     }
     
+    // Standard devation
     var standardDeviation: Double? {
         guard !measuredValues.isEmpty else { return nil }
         
@@ -57,7 +62,7 @@ struct DataSum: View {
         return sqrt(sumOfSquaredDifferences / Double(rssiValues.count))
     }
     
-    
+    // Median
     var medianRSSI: Int?{
         let sortedRSSIValues = measuredValues.map{$0.rssi}.sorted()
         let count = sortedRSSIValues.count
@@ -76,6 +81,8 @@ struct DataSum: View {
     var body: some View {
         
         ZStack{
+            
+            // Dismiss button
             Color.clear
                 .overlay(alignment: .topTrailing){
                     Button{
@@ -85,30 +92,39 @@ struct DataSum: View {
                             .imageScale(.large)
                             .padding()
                             .foregroundColor(.secondary)
+                            .opacity(0.6)
                     }
                 }
-                .overlay(alignment: .top){
+            
+            // Main body of view
+            GeometryReader {geometry in
+                VStack(spacing:10) {
                     Text("Data Summary")
-                        .foregroundColor(Color("TextColor"))
                         .font(.largeTitle)
+                    Spacer()
+                    
+                    //Show list of Data summary only when sheet is larger than 100, To improv .fraction(0.1) look
+                    if geometry.size.height > 100{
+                        Text("""
+                         Mean: \(meanRSSI)
+                         Median RSSI: \(medianRSSI ?? 0)
+                         Total Points Measured: \(totalPointsMeasured)
+                         Smallest Value: \(smallestValue ?? 0)
+                         Largest Value: \(largestValue ?? 0)
+                         Range of RSSI: \(rangeOfRSSI ?? 0)
+                         Standard Deviation: \(standardDeviation ?? 0)
+                         Time Range: \(timeRange != nil ? "\(timeRange!.start) - \(timeRange!.end)" : "-")
+                         """)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(10)
                         .padding()
+                        Spacer()
+                    }
                 }
+                // sets correct size for Geometry reader (helps center the view)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+            }
+            .padding()
         }
-//        VStack(spacing:10) {
-//                        Text("Mean: \(meanRSSI)")
-//                        Text("Total Points Measured: \(totalPointsMeasured)")
-//                        Text("Largest Value: \(largestValue ?? 0)") // Use 0 as default value if largestValue is nil
-//                        Text("Smallest Value: \(smallestValue ?? 0)") // Use 0 as default value if smallestValue is nil
-//                        Text("Median RSSI: \(medianRSSI ?? 0)") // Use 0 as default value if medianRSSI is nil
-//                        Text("Range of RSSI: \(rangeOfRSSI ?? 0)") // Use 0 as default value if rangeOfRSSI is nil
-//                        if let timeRange = timeRange {
-//                            Text("Time Range: \(timeRange.start) - \(timeRange.end)")
-//                        } else {
-//                            Text("Time Range: -")
-//                        }
-//                        Text("Standard Deviation: \(standardDeviation ?? 0)") // Use 0 as default value if standardDeviation is nil
-//                        Spacer()
-//                    }
-//                    .padding()
     }
 }
